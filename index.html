@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Speed Typing test</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+<div class="mainDiv">
+	<div class="centerDiv">
+		<h1>Speed Typing test</h1>
+		<h2 id="msg"></h2>
+		<br>
+		<textarea id="mywords" cols="100" rows="10" disabled></textarea>
+		<br>
+		<button id="btn" class="mainbtn">Start</button>
+	</div>
+</div>
+
+
+<script>
+	
+const setOfWords = [
+			"My name is chandan.",
+			"I belongs to jharkhand.",
+			"I am a software engineer."
+					];
+
+const msg = document.getElementById('msg');
+
+const typeWords = document.getElementById('mywords');
+const btn = document.getElementById('btn');
+let startTime;
+let endTime;
+
+
+//function to start typing start
+const startTyping = () => {
+	let randomNumber = Math.floor(Math.random() * setOfWords.length); // get random number from 0 to array.length-1 
+
+	msg.innerText = setOfWords[randomNumber];// get the string of particular index and display
+	let date = new Date();
+	startTime = date.getTime();
+	btn.innerText = "Done"
+
+}
+//function to start typing ends
+
+
+
+//function to end typing start
+const endTyping = () => {
+	let date = new Date();
+	endTime = date.getTime(); // get time in seconds 
+
+	let totalTime = ((endTime - startTime)/1000);  // convert in seconds
+
+	let totalStr  = typeWords.value;
+	let wordCount = wordCounter(totalStr);	
+
+	let speed = Math.round((wordCount / totalTime) * 60 ); //calculate per minute
+
+	let finalMsg = " You have typed total at " + speed + " words per minutes."
+
+	finalMsg += compareWords(msg.innerText, totalStr);
+
+	msg.innerText = finalMsg;
+}
+
+//function to end typing sends
+
+
+//function to compare the given string withuser typed string  starts
+
+let compareWords = (str1, str2) => {
+
+	// let words1 = str1.split(" ");
+	// let words2 = str2.split(" ");
+
+	let words1 = str1.trim().split(/\s+/);
+	let words2 = str2.trim().split(/\s+/);
+
+	let cnt = 0;
+
+	words1.forEach(function (item, index) {
+		if(item == words2[index]){
+			cnt++;                     //If user typed string is matched with given string then count
+		}
+	});
+
+	let errorWords = (words1.length - cnt);  // Substract user typed string with Given string
+	return (cnt + " correct out of " + words1.length + " words and the total number of error are " + errorWords + ".");
+}
+//function to compare the given string withuser typed string  ends
+
+
+//function to count user typed string  starts
+const wordCounter = (str) => {
+	// let response = str.split(" ").length;
+
+	let response = str.trim().split(/\s+/).length;
+	return response;
+}
+//function to count user typed string ends
+
+
+//event fire on click start button starts 
+btn.addEventListener('click', function () {
+
+	if (this.innerText == 'Start') {
+		typeWords.disabled = false;
+		startTyping();
+	}else if(this.innerText == "Done"){
+		typeWords.disabled = true;
+		btn.innerText = "Start";
+		endTyping();
+	}
+});
+
+//event fire on click start button ends
+
+
+</script>
+
+</body>
+</html>
