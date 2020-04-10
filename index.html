@@ -2,28 +2,42 @@
 <html>
 <head>
 	<title>Speed Typing test</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	 	<link rel="stylesheet" type="text/css" href="style.css">
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 
-<div class="mainDiv">
-	<div class="centerDiv">
-		<h1>Speed Typing test</h1>
-		<h2 id="msg"></h2>
-		<br>
-		<textarea id="mywords" cols="100" rows="10" disabled></textarea>
-		<br>
-		<button id="btn" class="mainbtn">Start</button>
+<div class="container-fluid">
+	<div class="mainDiv">
+		<div class="centerDiv">
+			<h1>Speed Typing test</h1>
+			<h2 id="msg"></h2>
+			<br>
+			<textarea id="mywords" cols="100" rows="12" disabled></textarea>
+			<br>
+			<button id="btn" class="mainbtn">Start</button>
+		</div>
 	</div>
 </div>
-
 
 <script>
 	
 const setOfWords = [
 			"My name is chandan.",
-			"I belongs to jharkhand.",
+			"I belong to jharkhand.",
 			"I am a software engineer."
 					];
 
@@ -120,8 +134,38 @@ btn.addEventListener('click', function () {
 
 //event fire on click start button ends
 
+</script>
+
+<script>
+	
+$(document).ready(function(){
+	
+	$('#mywords').keyup(function () {
+		var msgStr = "";
+		let userTyped = $(this).val();
+		let	userTypedSplit = userTyped.trim().split(/\s+/);
+
+		let msg = $('#msg').text();
+		let	msgSplit = msg.trim().split(/\s+/);
+
+		
+
+		for (var i = 0;  i < msgSplit.length; i++) {
+			if (msgSplit[i] == userTypedSplit[i]) {
+			
+				msgStr += "<b style='color:pink;'> "+msgSplit[i]+" </b>";
+			}else{
+				msgStr += " "+msgSplit[i];
+			}
+		}
+
+  		$('#msg').html(msgStr);
+
+	});
+});
 
 </script>
+
 
 </body>
 </html>
