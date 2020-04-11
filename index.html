@@ -37,8 +37,8 @@
 	
 const setOfWords = [
 			"My name is chandan.",
-			"I belong to jharkhand.",
-			"I am a software engineer."
+			"we belong to jharkhand.",
+			"They are software engineer."
 					];
 
 const msg = document.getElementById('msg');
@@ -141,7 +141,7 @@ btn.addEventListener('click', function () {
 $(document).ready(function(){
 	
 	$('#mywords').keyup(function () {
-		var msgStr = "";
+		var msgWordStr = "";
 		let userTyped = $(this).val();
 		let	userTypedSplit = userTyped.trim().split(/\s+/);
 
@@ -149,17 +149,34 @@ $(document).ready(function(){
 		let	msgSplit = msg.trim().split(/\s+/);
 
 		
+		// start compare word by word 
 
 		for (var i = 0;  i < msgSplit.length; i++) {
 			if (msgSplit[i] == userTypedSplit[i]) {
 			
-				msgStr += "<b style='color:pink;'> "+msgSplit[i]+" </b>";
+				msgWordStr += "<b style='color:pink;'> "+msgSplit[i]+" </b>";
 			}else{
-				msgStr += " "+msgSplit[i];
+				msgWordStr += " "+msgSplit[i];
 			}
 		}
+  		$('#msg').html(msgWordStr);
 
-  		$('#msg').html(msgStr);
+
+
+  		// start compare character by character
+		var msgStr = "";
+
+		for (var i = 0; i < msg.length; i++) {
+				if(msg[i] == userTyped[i]){
+					msgStr += "<b style='color:white;'>"+msg[i]+"</b>";
+				}else if(msg[i] == " "){
+					msgStr += " ";;
+				}else{
+					msgStr += msg[i];
+				}
+		}
+
+		$('#msg').html(msgStr);
 
 	});
 });
