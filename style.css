@@ -54,13 +54,11 @@ textarea{
 
 @media only screen and (max-width: 500px){
 	textarea {
-  width: 180%;
-  height: 180px;
-  /*padding-left: -40px !important;*/
-  margin-left: -90px !important;
+	  width: 180%;
+	  height: 180px;
+	  margin-left: -90px !important;
 	}
 }
-
 
 
 

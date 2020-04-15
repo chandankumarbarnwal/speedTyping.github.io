@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Count number</title>
+ 	<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="mainDiv">
+		<div class="centerDiv">
+			<h1>Count number of words and characters.</h1>
+			<h2 id="msg"></h2>
+			<br>
+			<textarea id="mywords" cols="100" rows="12" disabled></textarea>
+			<br>
+			<button id="btn" class="mainbtn">Start</button>
+		</div>
+	</div>
+</div>
+
+<script>
+
+const msg = document.getElementById('msg');
+
+const typeWords = document.getElementById('mywords');
+const btn = document.getElementById('btn');
+
+//function to start typing start
+const startTyping = () => {
+	btn.innerText = "Done"
+}
+//function to start typing ends
+
+
+//function to end typing start
+const endTyping = () => {
+	let totalStr  = typeWords.value;
+	let wordCount = wordCounter(totalStr);	
+
+	let finalMsg = " You have typed total " + wordCount + " words. And number of characters are ";
+
+	finalMsg += characterCounter(totalStr);
+
+	msg.innerText = finalMsg;
+}
+//function to end typing sends
+
+//function to count no. of characters of sentances starts
+const characterCounter = (str) => {
+
+	str = str.trim();
+	let response = str.replace(/\s+/g, " ").length;
+	return response+".";
+}
+//function to count no. of characters of sentances ends
+
+
+
+//function to count words user typed string  starts
+const wordCounter = (str) => {
+	let response = str.trim().split(/\s+/).length;
+	return response;
+}
+//function to count words user typed string ends
+
+
+//event fire on click start button starts 
+btn.addEventListener('click', function () {
+
+	if (this.innerText == 'Start') {
+		typeWords.disabled = false;
+		startTyping();
+	}else if(this.innerText == "Done"){
+		typeWords.disabled = true;
+		btn.innerText = "Start";
+		endTyping();
+	}
+});
+
+</script>
+
+</body>
+</html>
